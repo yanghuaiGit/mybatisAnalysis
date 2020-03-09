@@ -1,0 +1,40 @@
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="generator/generatorConfig.properties"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <!--和lombok结合-->
+            <property name="lombok" value="Getter,Setter,Accessors"/>
+            <property name="mappers" value="${mapper.Mapper}"/>
+
+
+        </plugin>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.user}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+        <!--实体-->
+        <javaModelGenerator targetPackage="com.yh.mybatis.domain.entity.${moduleName}" targetProject="src/main/java"/>
+
+        <!--mapper.xml-->
+        <sqlMapGenerator targetPackage="mapper.${moduleName}" targetProject="src/main/resources"/>
+
+        <!--mapper接口-->
+        <javaClientGenerator targetPackage="com.yh.mybatis.dto.mapper.${moduleName}" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <table tableName="${tableName}">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

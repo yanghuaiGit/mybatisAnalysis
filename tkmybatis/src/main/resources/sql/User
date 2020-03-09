@@ -1,0 +1,22 @@
+create table mybatis.user
+(
+  u_id        bigint  auto_increment
+    primary key,
+  u_name      varchar(8) default ''              not null
+  comment ' 姓名',
+  sex         tinyint default '1' not null
+  comment '1男性2女性',
+  age         int(8)  default '0' null
+  comment '年龄',
+  createTime  datetime default CURRENT_TIMESTAMP   not null
+  comment ' 创建时间',
+  modify_time datetime default CURRENT_TIMESTAMP   not null
+  on update CURRENT_TIMESTAMP
+  comment '修改时间',
+  constraint user_u_id_uindex
+  unique (u_id)
+)
+  comment '用户表'
+engine = InnoDB
+charset = utf8;
+

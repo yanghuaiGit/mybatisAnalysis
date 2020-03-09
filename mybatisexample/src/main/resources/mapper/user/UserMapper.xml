@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisexample.mapper.user.UserMapper">
+    <resultMap id="BaseResultMap" type="com.example.mybatisexample.domain.entity.user.User">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <result column="u_id" jdbcType="BIGINT" property="uId"/>
+        <result column="u_name" jdbcType="VARCHAR" property="uName"/>
+        <result column="sex" jdbcType="TINYINT" property="sex"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+    <select id="select" resultType="com.example.mybatisexample.domain.entity.user.User">
+
+    select  * from user
+        <where>
+            <if test="uId!=null">
+                and u_id=#{uId}
+            </if>
+            <if test="uName!=null">
+                and u_name=#{uName}
+            </if>
+        </where>
+  </select>
+</mapper>
