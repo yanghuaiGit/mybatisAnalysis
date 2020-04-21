@@ -12,4 +12,6 @@ import java.util.List;
 public interface UserMapper {
 
     List<User> select();
+
+    List<User> selectById(Long uId);
 }

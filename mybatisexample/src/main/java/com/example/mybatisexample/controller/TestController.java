@@ -3,6 +3,7 @@ package com.example.mybatisexample.controller;
 import com.example.mybatisexample.domain.entity.user.User;
 import com.example.mybatisexample.mapper.user.OtherMapper;
 import com.example.mybatisexample.mapper.user.UserMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -25,6 +26,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/test")
+@Slf4j
 public class TestController {
 
     @Resource
@@ -36,17 +38,14 @@ public class TestController {
     @GetMapping("/select")
     public List<User> test() {
 //        otherMapper.selectAll();
-
-
-        User user = User.builder()
-                .age(1000)
-                .sex(1)
-                .uName("用户1")
-                .build();
-
 //        System.out.println(otherMapper.selectAll());
 
-        return userMapper.select();
+        List<User> select = userMapper.select();
+        log.info("list {}", select);
+
+        List<User> users = userMapper.selectById(1L);
+        log.info("user {}", users);
+        return select;
     }
 
 

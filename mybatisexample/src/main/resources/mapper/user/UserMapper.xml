@@ -13,15 +13,16 @@
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
     <select id="select" resultType="com.example.mybatisexample.domain.entity.user.User">
-
     select  * from user
+  </select>
+
+    <select id="selectById" resultType="com.example.mybatisexample.domain.entity.user.User">
+
+        select  * from user
         <where>
             <if test="uId!=null">
                 and u_id=#{uId}
             </if>
-            <if test="uName!=null">
-                and u_name=#{uName}
-            </if>
         </where>
-  </select>
+    </select>
 </mapper>
