@@ -4,7 +4,7 @@ spring:
     hikari:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
-      password: root
+      password: rootroot
 logging:
   level:
     root: info
