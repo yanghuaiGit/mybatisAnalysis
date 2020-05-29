@@ -1,6 +1,7 @@
 package com.example.mybatisexample.configuration;
 
 import com.example.mybatisexample.intercepter.SqlCostInterceptor;
+import com.example.mybatisexample.intercepter.SqlExecutorCostInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,15 @@ public class InterceptrConfiguration {
     public Interceptor performanceInterceptor() {
 
         Interceptor sqlCostInterceptor = new SqlCostInterceptor();
+        Properties properties = new Properties();
+        properties.setProperty(SqlCostInterceptor.TIME_LIMIT_KEY, SqlCostInterceptor.DEFAULT_TIME_LIMIT);
+        sqlCostInterceptor.setProperties(properties);
+        return sqlCostInterceptor;
+    }
+
+    @Bean
+    public Interceptor performanceInterceptor1() {
+        Interceptor sqlCostInterceptor = new SqlExecutorCostInterceptor();
         Properties properties = new Properties();
         properties.setProperty(SqlCostInterceptor.TIME_LIMIT_KEY, SqlCostInterceptor.DEFAULT_TIME_LIMIT);
         sqlCostInterceptor.setProperties(properties);

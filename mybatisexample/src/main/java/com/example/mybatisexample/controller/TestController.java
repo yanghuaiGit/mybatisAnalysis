@@ -40,7 +40,7 @@ public class TestController {
 //        otherMapper.selectAll();
 //        System.out.println(otherMapper.selectAll());
 
-        List<User> select = userMapper.select();
+        List<User> select = userMapper.selectById(1L);
         log.info("list {}", select);
 
         //
@@ -48,7 +48,7 @@ public class TestController {
             List<User> users = userMapper.selectById(1L);
             log.info("user {}", users);
 
-            userMapper.updateById(users.get(0).getUId(), "2222");
+            userMapper.updateById(users.get(0).getUId(), "22222");
 
             users = userMapper.selectById(1L);
             log.info("user {}", users);
@@ -64,23 +64,6 @@ public class TestController {
     }
 
 
-    public void test1() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
 
-        // 1、获取sqlSessionFactory对象
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        // 2、获取sqlSession对象
-        SqlSession openSession = sqlSessionFactory.openSession();
-        try {
-            // 3、获取接口的实现类对象，会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
-            UserMapper mapper = openSession.getMapper(UserMapper.class);
-            // 4、执行增删改查方法
-            List<User> dept = mapper.select();
-            System.out.println(dept);
-        } finally {
-            openSession.close();
-        }
-    }
 
 }
