@@ -12,6 +12,10 @@
         <result column="createTime" jdbcType="TIMESTAMP" property="createtime"/>
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
+    <update id="updateById">
+        update  user set u_name= #{newName} where  u_id=#{uId}
+
+    </update>
     <select id="select" resultType="com.example.mybatisexample.domain.entity.user.User">
     select  * from user
   </select>

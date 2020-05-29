@@ -8,7 +8,7 @@ spring:
 logging:
   level:
     root: info
-    com.example.mybatisexample.mapper: trace
+    com.example.mybatisexample.mapper: error
 server:
   port: 8082
 mybatis:

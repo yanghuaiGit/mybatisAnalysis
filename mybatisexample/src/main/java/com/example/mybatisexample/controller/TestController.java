@@ -36,15 +36,30 @@ public class TestController {
     private OtherMapper otherMapper;
 
     @GetMapping("/select")
-    public List<User> test() {
+    public List<User> test() throws InterruptedException {
 //        otherMapper.selectAll();
 //        System.out.println(otherMapper.selectAll());
 
         List<User> select = userMapper.select();
         log.info("list {}", select);
 
+        //
+        new Thread(() -> {
+            List<User> users = userMapper.selectById(1L);
+            log.info("user {}", users);
+
+            userMapper.updateById(users.get(0).getUId(), "2222");
+
+            users = userMapper.selectById(1L);
+            log.info("user {}", users);
+
+        }).start();
+
+        Thread.sleep(4000);
         List<User> users = userMapper.selectById(1L);
+        //主线程不会查到上面异步线程更新的值 因为sqlsession的缓存是根据thread来的
         log.info("user {}", users);
+
         return select;
     }
 
